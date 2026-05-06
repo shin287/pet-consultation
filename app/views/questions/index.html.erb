@@ -10,6 +10,9 @@
     <p>カテゴリ：<%= question.category %></p>
     <p><%= question.body %></p>
     <p>
+      <%= link_to "編集", edit_question_path(question) %>
+    </p>
+    <p>
       <%= link_to "削除", question_path(question), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
     </p>
   </div>

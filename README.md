@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# pet-consultation-app
+>>>>>>> 89a5b265b48e40f14d856ecf0912a731db5f6e16
