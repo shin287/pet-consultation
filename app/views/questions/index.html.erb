@@ -1,0 +1,16 @@
+<h1>質問一覧</h1>
+
+<%= link_to "質問する", new_question_path %>
+
+<% @questions.each do |question| %>
+  <div>
+    <h2>
+      <%= link_to question.title, question_path(question) %>
+    </h2>
+    <p>カテゴリ：<%= question.category %></p>
+    <p><%= question.body %></p>
+    <p>
+      <%= link_to "削除", question_path(question), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+    </p>
+  </div>
+<% end %>

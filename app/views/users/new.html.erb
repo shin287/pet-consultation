@@ -1,0 +1,22 @@
+<h1>新規登録</h1>
+
+<%= form_with model: @user do |f| %>
+  <p>
+    名前<br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    メールアドレス<br>
+    <%= f.email_field :email %>
+  </p>
+
+  <p>
+    パスワード<br>
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.submit "登録" %>
+  </p>
+<% end %>
