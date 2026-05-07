@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root "home#top"
 
   resources :users, only: [:new, :create]
-  resources :questions, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :questions, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :answers, only: [:create, :destroy]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

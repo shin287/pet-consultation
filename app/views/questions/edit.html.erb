@@ -1,24 +1,38 @@
 <h1>質問を編集</h1>
 
 <%= form_with model: @question do |f| %>
-  <p>
-    タイトル<br>
-    <%= f.text_field :title %>
-  </p>
+  <% if @question.answers.any? %>
+    <p>回答がついているため、質問内容は変更できません。追記のみ可能です。</p>
 
-  <p>
-    カテゴリ<br>
-    <%= f.text_field :category %>
-  </p>
+    <p>
+      追記<br>
+      <%= f.text_area :additional_info %>
+    </p>
+  <% else %>
+    <p>
+      タイトル<br>
+      <%= f.text_field :title %>
+    </p>
 
-  <p>
-    相談内容<br>
-    <%= f.text_area :body %>
-  </p>
+    <p>
+      カテゴリ<br>
+      <%= f.text_field :category %>
+    </p>
 
-  <p>
-    <%= f.submit "更新する" %>
-  </p>
+    <p>
+      相談内容<br>
+      <%= f.text_area :body %>
+    </p>
+
+    <p>
+      追記<br>
+      <%= f.text_area :additional_info %>
+    </p>
+  <% end %>
+
+    <p>
+      <%= f.submit "更新する" %>
+    </p>
 <% end %>
 
 <%= link_to "詳細へ戻る", question_path(@question) %>
