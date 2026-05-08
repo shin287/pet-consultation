@@ -1,11 +1,11 @@
-<h1>新規登録</h1>
+<h1>専門家登録</h1>
 <% if @user.errors.any? %>
   <% @user.errors.full_messages.each do |message| %>
     <p><%= message %></p>
   <% end %>
 <% end %>
 
-<%= form_with model: @user do |f| %>
+<%= form_with model: @user, url: experts_path do |f| %>
   <p>
     名前<br>
     <%= f.text_field :name %>

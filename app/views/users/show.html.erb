@@ -1,0 +1,21 @@
+<h1>マイページ</h1>
+
+<p>名前：<%= @user.name %></p>
+<p>メールアドレス：<%= @user.email %></p>
+<p>
+  区分：
+  <% if @user.expert? %>
+    専門家
+  <% elsif @user.role == "admin" %>
+    管理者
+  <% else %>
+    一般
+  <% end %>
+</p>
+
+<h2>自分の質問一覧</h2>
+<% @user.questions.each do |question| %>
+  <p>
+    <%= link_to question.title, question_path(question) %>
+  </p>
+<% end %>

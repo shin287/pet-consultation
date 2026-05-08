@@ -1,4 +1,9 @@
 <h1>質問する</h1>
+<% if @question.errors.any? %>
+  <% @question.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
 
 <%= form_with model: @question do |f| %>
   <p>
@@ -8,12 +13,48 @@
 
   <p>
     カテゴリ<br>
-    <%= f.text_field :category %>
+    <p>
+      <%= f.label :animal_type, "ペットの種類" %><br>
+      <%= f.select :animal_type,
+      [
+        ["犬","犬"],
+        ["猫","猫"],
+        ["鳥","鳥"],
+        ["小動物","小動物"],
+        ["爬虫類","爬虫類"],
+        ["その他","その他"]
+      ] %>
+    </p>
+
+    <p>
+      <%= f.label :animal_other, "その他の場合" %>
+      <%= f.text_field :animal_other %>
+    </p>
+
+    <p>
+      <%= f.label :consultation_type, "相談内容" %><br>
+      <%= f.select :consultation_type,
+      [
+        ["ごはん","ごはん"],
+        ["病気・体調","病気・体調"],
+        ["しつけ","しつけ"],
+        ["行動・癖","行動・癖"],
+        ["お手入れ","お手入れ"],
+        ["飼育環境","飼育環境"],
+        ["高齢ケア","高齢ケア"],
+        ["その他","その他"]
+      ] %>
+    </p>
   </p>
 
   <p>
     相談内容<br>
     <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.label :image, "画像" %><br>
+    <%= f.file_field :image %>
   </p>
 
   <p>

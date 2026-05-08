@@ -1,32 +1,51 @@
 <h1><%= @question.title %></h1>
 
-<p>カテゴリ：<%= @question.category %></p>
-<p><%= @question.body %></p>
+<p>質問者： <%= @question.user.name %></p>
+<p>カテゴリ：<%= @question.animal_type %> / <%= @question.consultation_type %></p>
+<p>質問内容：<%= @question.body %></p>
+<% if @question.image.attached? %>
+  <p>
+    <%= image_tag @question.image, class: "question-image" %>
+  </p>
+<% end %>
+<p><%= @question.created_at.strftime("%Y/%m/%d %H:%M") %></p>
 
 <% if @question.additional_info.present? %>
   <h2>追記</h2>
   <p><%= @question.additional_info %></p>
+  <p><%= @question.updated_at.strftime("%Y/%m/%d %H:%M") %></p>
 <% end %>
 
 <h2>回答一覧</h2>
 
 <% @question.answers.each do |answer| %>
-  <div>
-    <p><%= answer.body %></p>
-  </div>
+  <% next if answer.new_record? %>
+  
+  <p>回答者： <%= answer.user.name %></p>
+  <p>回答：<%= answer.body %></p>
+  <p><%= answer.created_at.strftime("%Y/%m/%d %H:%M") %></p>
 <% end %>
 
-<h2>回答する</h2>
+<% if current_user&.expert? %>
 
-<%= form_with model: [@question, @answer] do |f| %>
-  <div>
-    <%= f.label :body, "回答内容" %><br>
-    <%= f.text_area :body  %>
-  </div>
+  <h2>回答する</h2>
+  <% if @answer.errors.any? %>
+    <% @answer.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  <% end %>
 
-  <div>
-    <%= f.submit "回答を投稿する" %>
-  </div>
+  <%= form_with model: [@question, @answer] do |f| %>
+    <p>
+      <%= f.label :body, "回答内容" %><br>
+      <%= f.text_area :body  %>
+    </p>
+
+    <p>
+      <%= f.submit "回答を投稿する" %>
+    </p>
+  <% end %>
+  
 <% end %>
 
 <%= link_to "質問一覧へ", questions_path %>

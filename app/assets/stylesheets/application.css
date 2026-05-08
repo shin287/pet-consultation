@@ -8,3 +8,18 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.header-logo{
+  width: 240px;
+  height: auto;
+}
+
+.top-image{
+  width: 500px;
+  height: auto;
+}
+
+.question-image{
+  width: 300px;
+  height: auto;
+}

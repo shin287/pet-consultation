@@ -1,13 +1,26 @@
-<h1>ペット相談アプリ</h1>
+<h1>ペット相談専門サイト</h1>
 
-<p>ペットの悩みを気軽に相談できるアプリです</p>
+<%= image_tag "dogandcat.png", alt: "犬と猫の画像", class: "top-image" %>
 
-<p>
-  <a href="#">ログイン</a>
-  <%= link_to "新規登録", new_user_path %>
-</p>
+<p>ペットの悩みを気軽にご相談できるウェブサイトです</p>
+
+<% if current_user %>
+  <p>
+    ログイン中： <%= current_user.name %>
+  </p>
+<% else %>
+
+    <%= link_to "ログイン", login_path %>
+    <%= link_to "新規登録", new_user_path %>
+
+<% end %>
 
 <p>
   <%= link_to "質問一覧を見る", questions_path %>
-  <%= link_to "質問する", new_question_path %>
 </p>
+
+<% if current_user&.general? %>
+  <p>
+    <%= link_to "質問する", new_question_path %>
+  </p>
+<% end %>
