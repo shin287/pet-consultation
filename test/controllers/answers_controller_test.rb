@@ -1,13 +1,8 @@
 require "test_helper"
 
 class AnswersControllerTest < ActionDispatch::IntegrationTest
-  test "should get create" do
-    get answers_create_url
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get answers_destroy_url
-    assert_response :success
+  test "redirects guest from create" do
+    post question_answers_url(questions(:one)), params: { answer: { body: "回答です" } }
+    assert_redirected_to questions_url
   end
 end

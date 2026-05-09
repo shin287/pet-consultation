@@ -2,22 +2,22 @@ require "test_helper"
 
 class QuestionsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get questions_index_url
+    get questions_url
     assert_response :success
   end
 
   test "should get show" do
-    get questions_show_url
+    get question_url(questions(:one))
     assert_response :success
   end
 
-  test "should get new" do
-    get questions_new_url
-    assert_response :success
+  test "redirects guest from new" do
+    get new_question_url
+    assert_redirected_to login_url
   end
 
-  test "should get create" do
-    get questions_create_url
-    assert_response :success
+  test "redirects guest from edit" do
+    get edit_question_url(questions(:one))
+    assert_redirected_to questions_url
   end
 end

@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
+  get "sessions/new"
   get "home/top"
   root "home#top"
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
+
+  get "experts/new", to: "users#new_expert", as: "new_expert"
+  post "experts", to: "users#create_expert"
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
+  
   resources :questions, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :answers, only: [:create, :destroy]
   end

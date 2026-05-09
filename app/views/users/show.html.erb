@@ -1,0 +1,39 @@
+<main class="page page-profile">
+  <section class="detail-card">
+    <h1>マイページ</h1>
+
+    <dl class="profile-list">
+      <div>
+        <dt>名前</dt>
+        <dd><%= @user.name %></dd>
+      </div>
+      <div>
+        <dt>メールアドレス</dt>
+        <dd><%= @user.email %></dd>
+      </div>
+      <div>
+        <dt>区分</dt>
+        <dd>
+          <% if @user.expert? %>
+            専門家
+          <% elsif @user.role == "admin" %>
+            管理者
+          <% else %>
+            一般
+          <% end %>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="content-card">
+    <h2>自分の質問一覧</h2>
+    <div class="link-list">
+      <% @user.questions.each do |question| %>
+        <p>
+          <%= link_to question.title, question_path(question) %>
+        </p>
+      <% end %>
+    </div>
+  </section>
+</main>

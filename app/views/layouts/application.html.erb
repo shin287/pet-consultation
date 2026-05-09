@@ -24,6 +24,34 @@
   </head>
 
   <body>
+
+    <header>
+      <%= link_to root_path do %>
+        <%= image_tag "paw_logo_ptcn_balloon_xxl.svg", alt: "ロゴ", class: "header-logo" %>
+      <% end %>
+
+      <nav>
+        <%= link_to "質問一覧", questions_path %>
+
+        <% if current_user %>
+          <%= link_to "マイページ", user_path(current_user) %>
+          <%= button_to "ログアウト", logout_path, method: :delete %>
+        <% else %>
+          <%= link_to "新規登録", new_user_path %>
+          <%= link_to "ログイン", login_path %>
+        <% end %>
+
+        <% if current_user&.role == "admin" %>
+          <%= link_to "専門家登録", new_expert_path %>
+        <% end %>
+        
+      </nav>
+    </header>
+
+    <% flash.each do |type, message| %>
+      <p class="flash-message flash-<%= type %>"><%= message %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
