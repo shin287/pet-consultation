@@ -188,7 +188,14 @@ header nav form {
   margin-top: 18px;
 }
 
-.top-actions a {
+.top-actions form,
+.guest-login-actions form {
+  margin: 0;
+}
+
+.top-actions a,
+.top-actions button,
+.guest-login-actions button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -201,10 +208,15 @@ header nav form {
   line-height: 1.2;
   text-decoration: none;
   background-color: #2f7d59;
+  cursor: pointer;
   box-shadow: 0 10px 22px rgba(47, 125, 89, 0.18);
 }
 
-.top-actions a:hover {
+.top-actions a:hover,
+.top-actions button:hover,
+.guest-login-actions button:hover {
+  color: #ffffff;
+  text-decoration: none;
   border-color: #236246;
   background-color: #236246;
 }
@@ -416,6 +428,14 @@ input[type="submit"]:hover,
 .form-submit {
   display: flex;
   justify-content: flex-end;
+}
+
+.guest-login-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #e1e9e3;
 }
 
 .page-actions,
