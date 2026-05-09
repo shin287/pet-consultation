@@ -17,5 +17,9 @@
         <%= f.submit "ログイン" %>
       </div>
     <% end %>
+
+    <div class="guest-login-actions">
+      <%= button_to "ゲストログイン", guest_login_path, method: :post, data: { turbo: false } %>
+    </div>
   </section>
 </main>
