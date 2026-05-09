@@ -1,38 +1,44 @@
-<h1>質問を編集</h1>
+<main class="page page-form">
+  <section class="form-card">
+    <h1>質問を編集</h1>
 
-<%= form_with model: @question do |f| %>
-  <% if @question.answers.any? %>
-    <p>回答がついているため、質問内容は変更できません。追記のみ可能です。</p>
+    <%= form_with model: @question, class: "basic-form" do |f| %>
+      <% if @question.answers.any? %>
+        <p class="notice-text">回答がついているため、質問内容は変更できません。追記のみ可能です。</p>
 
-    <p>
-      追記<br>
-      <%= f.text_area :additional_info %>
-    </p>
-  <% else %>
-    <p>
-      タイトル<br>
-      <%= f.text_field :title %>
-    </p>
+        <div class="form-field">
+          <%= f.label :additional_info, "追記" %>
+          <%= f.text_area :additional_info %>
+        </div>
+      <% else %>
+        <div class="form-field">
+          <%= f.label :title, "タイトル" %>
+          <%= f.text_field :title %>
+        </div>
 
-    <p>
-      カテゴリ<br>
-      <%= f.text_field :category %>
-    </p>
+        <div class="form-field">
+          <%= f.label :category, "カテゴリ" %>
+          <%= f.text_field :category %>
+        </div>
 
-    <p>
-      相談内容<br>
-      <%= f.text_area :body %>
-    </p>
+        <div class="form-field">
+          <%= f.label :body, "相談内容" %>
+          <%= f.text_area :body %>
+        </div>
 
-    <p>
-      追記<br>
-      <%= f.text_area :additional_info %>
-    </p>
-  <% end %>
+        <div class="form-field">
+          <%= f.label :additional_info, "追記" %>
+          <%= f.text_area :additional_info %>
+        </div>
+      <% end %>
 
-    <p>
-      <%= f.submit "更新する" %>
-    </p>
-<% end %>
+      <div class="form-submit">
+        <%= f.submit "更新する" %>
+      </div>
+    <% end %>
+  </section>
 
-<%= link_to "詳細へ戻る", question_path(@question) %>
+  <div class="page-actions">
+    <%= link_to "詳細へ戻る", question_path(@question) %>
+  </div>
+</main>

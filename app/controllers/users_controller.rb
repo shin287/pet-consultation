@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_admin, only: [:new_expert, :create_expert]
+  before_action :require_login, only: [:show]
+  before_action :correct_user_or_admin, only: [:show]
 
   def new_expert
     @user = User.new
@@ -35,6 +37,19 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def require_login
+    unless current_user
+      redirect_to login_path
+    end
+  end
+
+  def correct_user_or_admin
+    @user = User.find(params[:id])
+    unless @user == current_user || current_user&.role == "admin"
+      redirect_to root_path
+    end
+  end
 
   def require_admin
     unless current_user&.role == "admin"

@@ -1,19 +1,21 @@
-<h1>ログイン</h1>
+<main class="page page-form">
+  <section class="form-card compact-form-card">
+    <h1>ログイン</h1>
 
-<%= form_with url: login_path do |f| %>
+    <%= form_with url: login_path, class: "basic-form" do |f| %>
+      <div class="form-field">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email %>
+      </div>
 
-  <p>
-    メールアドレス<br>
-    <%= f.email_field :email %>
-  </p>
+      <div class="form-field">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password %>
+      </div>
 
-  <p>
-    パスワード<br>
-    <%= f.password_field :password %>
-  </p>
-
-  <p>
-    <%= f.submit "ログイン" %>
-  </p>
-
-<% end %>
+      <div class="form-submit">
+        <%= f.submit "ログイン" %>
+      </div>
+    <% end %>
+  </section>
+</main>

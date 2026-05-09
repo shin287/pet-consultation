@@ -1,26 +1,32 @@
-<h1>ペット相談専門サイト</h1>
+<main class="top-page">
+  <section class="top-hero">
+    <div class="top-hero-content">
+      <h1 id="top-title">ペット相談専門サイト</h1>
 
-<%= image_tag "dogandcat.png", alt: "犬と猫の画像", class: "top-image" %>
+      <p class="top-lead">ペットの悩みを気軽にご相談できるウェブサイトです</p>
 
-<p>ペットの悩みを気軽にご相談できるウェブサイトです</p>
+      <% if current_user %>
+        <p class="top-current-user">
+          ログイン中： <%= current_user.name %>
+        </p>
+      <% else %>
+        <div class="top-actions">
+          <%= link_to "ログイン", login_path %>
+          <%= link_to "新規登録", new_user_path %>
+        </div>
+      <% end %>
 
-<% if current_user %>
-  <p>
-    ログイン中： <%= current_user.name %>
-  </p>
-<% else %>
+      <div class="top-actions">
+        <%= link_to "質問一覧を見る", questions_path %>
 
-    <%= link_to "ログイン", login_path %>
-    <%= link_to "新規登録", new_user_path %>
+        <% if current_user&.general? %>
+          <%= link_to "質問する", new_question_path %>
+        <% end %>
+      </div>
+    </div>
 
-<% end %>
-
-<p>
-  <%= link_to "質問一覧を見る", questions_path %>
-</p>
-
-<% if current_user&.general? %>
-  <p>
-    <%= link_to "質問する", new_question_path %>
-  </p>
-<% end %>
+    <div class="top-hero-image">
+      <%= image_tag "dogandcat.png", alt: "犬と猫の画像", class: "top-image" %>
+    </div>
+  </section>
+</main>

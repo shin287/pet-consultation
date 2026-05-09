@@ -1,65 +1,72 @@
-<%= form_with url: questions_path, method: :get, local: true do |f| %>
-  <p>
-    <%= f.label :keyword, "検索" %><br>
-    <%= f.text_field :keyword, value: params[:keyword] %>
-  </p>
-  <p>
-    <%= f.label :status, "回答状況" %><br>
-    <%= f.select :status,
-      [
-        ["すべて",""],
-        ["未回答","unanswered"],
-        ["回答済","answered"]
-      ],
-      selected: params[:status]
-    %>
-  </p>
-  <p>
-    <%= f.submit "検索" %>
-  </p>
+<main class="page page-questions">
+  <section class="page-heading">
+    <h1>質問一覧</h1>
 
-  <%= f.label :sort, "並び順" %><br>
-
-  <%= f.select :sort,
-    [
-      ["新しい順","new"],
-      ["古い順","old"]
-    ],
-    { selected: params[:sort] },
-    { onchange: "this.form.submit();" }
-  %>
-<% end %>
-
-<h1>質問一覧</h1>
-
-<% if current_user&.general? %>
-  <p>
-    <%= link_to "質問する", new_question_path %>
-  </p>
-<% end %>
-
-<% @questions.each do |question| %>
-  <div>
-    <h2>
-      <%= link_to question.title, question_path(question) %>
-
-      <% if question.answers.any? %>
-        （回答済）
-      <% else %>
-        （未回答）
-      <% end %>
-    </h2>
-    <p>カテゴリ：<%= question.animal_type %> / <%= question.consultation_type %></p>
-    <p><%= question.body %></p>
-    <p><%= question.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-
-    <% if question.user == current_user %>
-      <p>
-        <%= link_to "編集", edit_question_path(question) %>
-      </p>
-      <p>
-        <%= link_to "削除", question_path(question), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-      </p>
+    <% if current_user&.general? %>
+      <div class="page-actions">
+        <%= link_to "質問する", new_question_path %>
+      </div>
     <% end %>
-  </div>
-<% end %>
+  </section>
+
+  <%= form_with url: questions_path, method: :get, local: true, class: "search-form" do |f| %>
+    <div class="form-field">
+      <%= f.label :keyword, "検索" %>
+      <%= f.text_field :keyword, value: params[:keyword] %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :status, "回答状況" %>
+      <%= f.select :status,
+        [
+          ["すべて",""],
+          ["未回答","unanswered"],
+          ["回答済","answered"]
+        ],
+        selected: params[:status]
+      %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :sort, "並び順" %>
+      <%= f.select :sort,
+        [
+          ["新しい順","new"],
+          ["古い順","old"]
+        ],
+        { selected: params[:sort] },
+        { onchange: "this.form.submit();" }
+      %>
+    </div>
+
+    <div class="form-submit">
+      <%= f.submit "検索" %>
+    </div>
+  <% end %>
+
+  <section class="question-list">
+    <% @questions.each do |question| %>
+      <article class="question-card">
+        <h2>
+          <%= link_to question.title, question_path(question) %>
+
+          <% if question.answers.any? %>
+            <span class="status-badge answered">回答済</span>
+          <% else %>
+            <span class="status-badge unanswered">未回答</span>
+          <% end %>
+        </h2>
+        <p class="question-meta">カテゴリ：<%= question.animal_type %> / <%= question.consultation_type %></p>
+        <p><%= question.body %></p>
+        <p class="question-meta"><%= question.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+
+        <% if question.user == current_user %>
+          <div class="item-actions">
+            <%= link_to "編集", edit_question_path(question) %>
+            <%= link_to "削除", question_path(question), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+          </div>
+        <% end %>
+      </article>
+    <% end %>
+  </section>
+</main>

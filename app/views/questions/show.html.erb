@@ -1,51 +1,65 @@
-<h1><%= @question.title %></h1>
+<main class="page page-question-detail">
+  <article class="detail-card">
+    <h1><%= @question.title %></h1>
 
-<p>質問者： <%= @question.user.name %></p>
-<p>カテゴリ：<%= @question.animal_type %> / <%= @question.consultation_type %></p>
-<p>質問内容：<%= @question.body %></p>
-<% if @question.image.attached? %>
-  <p>
-    <%= image_tag @question.image, class: "question-image" %>
-  </p>
-<% end %>
-<p><%= @question.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-
-<% if @question.additional_info.present? %>
-  <h2>追記</h2>
-  <p><%= @question.additional_info %></p>
-  <p><%= @question.updated_at.strftime("%Y/%m/%d %H:%M") %></p>
-<% end %>
-
-<h2>回答一覧</h2>
-
-<% @question.answers.each do |answer| %>
-  <% next if answer.new_record? %>
-  
-  <p>回答者： <%= answer.user.name %></p>
-  <p>回答：<%= answer.body %></p>
-  <p><%= answer.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-<% end %>
-
-<% if current_user&.expert? %>
-
-  <h2>回答する</h2>
-  <% if @answer.errors.any? %>
-    <% @answer.errors.full_messages.each do |message| %>
-      <p><%= message %></p>
+    <p class="question-meta">質問者： <%= @question.user.name %></p>
+    <p class="question-meta">カテゴリ：<%= @question.animal_type %> / <%= @question.consultation_type %></p>
+    <p>質問内容：<%= @question.body %></p>
+    <% if @question.image.attached? %>
+      <div class="image-frame">
+        <%= image_tag @question.image, class: "question-image" %>
+      </div>
     <% end %>
+    <p class="question-meta"><%= @question.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+  </article>
+
+  <% if @question.additional_info.present? %>
+    <section class="content-card">
+      <h2>追記</h2>
+      <p><%= @question.additional_info %></p>
+      <p class="question-meta"><%= @question.updated_at.strftime("%Y/%m/%d %H:%M") %></p>
+    </section>
   <% end %>
 
-  <%= form_with model: [@question, @answer] do |f| %>
-    <p>
-      <%= f.label :body, "回答内容" %><br>
-      <%= f.text_area :body  %>
-    </p>
+  <section class="content-section">
+    <h2>回答一覧</h2>
 
-    <p>
-      <%= f.submit "回答を投稿する" %>
-    </p>
+    <% @question.answers.each do |answer| %>
+      <% next if answer.new_record? %>
+
+      <article class="answer-card">
+        <p class="question-meta">回答者： <%= answer.user.name %></p>
+        <p>回答：<%= answer.body %></p>
+        <p class="question-meta"><%= answer.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+      </article>
+    <% end %>
+  </section>
+
+  <% if current_user&.expert? %>
+    <section class="content-card">
+      <h2>回答する</h2>
+      <% if @answer.errors.any? %>
+        <div class="error-messages">
+          <% @answer.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= form_with model: [@question, @answer], class: "basic-form" do |f| %>
+        <div class="form-field">
+          <%= f.label :body, "回答内容" %>
+          <%= f.text_area :body  %>
+        </div>
+
+        <div class="form-submit">
+          <%= f.submit "回答を投稿する" %>
+        </div>
+      <% end %>
+    </section>
   <% end %>
-  
-<% end %>
 
-<%= link_to "質問一覧へ", questions_path %>
+  <div class="page-actions">
+    <%= link_to "質問一覧へ", questions_path %>
+  </div>
+</main>

@@ -1,67 +1,75 @@
-<h1>質問する</h1>
-<% if @question.errors.any? %>
-  <% @question.errors.full_messages.each do |message| %>
-    <p><%= message %></p>
-  <% end %>
-<% end %>
+<main class="page page-form">
+  <section class="form-card">
+    <h1>質問する</h1>
+    <% if @question.errors.any? %>
+      <div class="error-messages">
+        <% @question.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
 
-<%= form_with model: @question do |f| %>
-  <p>
-    タイトル<br>
-    <%= f.text_field :title %>
-  </p>
+    <%= form_with model: @question, class: "basic-form" do |f| %>
+      <div class="form-field">
+        <%= f.label :title, "タイトル" %>
+        <%= f.text_field :title %>
+      </div>
 
-  <p>
-    カテゴリ<br>
-    <p>
-      <%= f.label :animal_type, "ペットの種類" %><br>
-      <%= f.select :animal_type,
-      [
-        ["犬","犬"],
-        ["猫","猫"],
-        ["鳥","鳥"],
-        ["小動物","小動物"],
-        ["爬虫類","爬虫類"],
-        ["その他","その他"]
-      ] %>
-    </p>
+      <div class="form-group">
+        <p class="form-group-title">カテゴリ</p>
 
-    <p>
-      <%= f.label :animal_other, "その他の場合" %>
-      <%= f.text_field :animal_other %>
-    </p>
+        <div class="form-field">
+          <%= f.label :animal_type, "ペットの種類" %>
+          <%= f.select :animal_type,
+          [
+            ["犬","犬"],
+            ["猫","猫"],
+            ["鳥","鳥"],
+            ["小動物","小動物"],
+            ["爬虫類","爬虫類"],
+            ["その他","その他"]
+          ] %>
+        </div>
 
-    <p>
-      <%= f.label :consultation_type, "相談内容" %><br>
-      <%= f.select :consultation_type,
-      [
-        ["ごはん","ごはん"],
-        ["病気・体調","病気・体調"],
-        ["しつけ","しつけ"],
-        ["行動・癖","行動・癖"],
-        ["お手入れ","お手入れ"],
-        ["飼育環境","飼育環境"],
-        ["高齢ケア","高齢ケア"],
-        ["その他","その他"]
-      ] %>
-    </p>
-  </p>
+        <div class="form-field">
+          <%= f.label :animal_other, "その他の場合" %>
+          <%= f.text_field :animal_other %>
+        </div>
 
-  <p>
-    相談内容<br>
-    <%= f.text_area :body %>
-  </p>
+        <div class="form-field">
+          <%= f.label :consultation_type, "相談内容" %>
+          <%= f.select :consultation_type,
+          [
+            ["ごはん","ごはん"],
+            ["病気・体調","病気・体調"],
+            ["しつけ","しつけ"],
+            ["行動・癖","行動・癖"],
+            ["お手入れ","お手入れ"],
+            ["飼育環境","飼育環境"],
+            ["高齢ケア","高齢ケア"],
+            ["その他","その他"]
+          ] %>
+        </div>
+      </div>
 
-  <p>
-    <%= f.label :image, "画像" %><br>
-    <%= f.file_field :image %>
-  </p>
+      <div class="form-field">
+        <%= f.label :body, "相談内容" %>
+        <%= f.text_area :body %>
+      </div>
 
-  <p>
-    <%= f.submit "投稿する" %>
-  </p>
-<% end %>
+      <div class="form-field">
+        <%= f.label :image, "画像" %>
+        <%= f.file_field :image %>
+      </div>
 
-<%= link_to "質問一覧へ", questions_path %>
+      <div class="form-submit">
+        <%= f.submit "投稿する" %>
+      </div>
+    <% end %>
+  </section>
 
+  <div class="page-actions">
+    <%= link_to "質問一覧へ", questions_path %>
+  </div>
+</main>
 

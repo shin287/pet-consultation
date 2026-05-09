@@ -1,32 +1,38 @@
-<h1>新規登録</h1>
-<% if @user.errors.any? %>
-  <% @user.errors.full_messages.each do |message| %>
-    <p><%= message %></p>
-  <% end %>
-<% end %>
+<main class="page page-form">
+  <section class="form-card compact-form-card">
+    <h1>新規登録</h1>
+    <% if @user.errors.any? %>
+      <div class="error-messages">
+        <% @user.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
 
-<%= form_with model: @user do |f| %>
-  <p>
-    名前<br>
-    <%= f.text_field :name %>
-  </p>
+    <%= form_with model: @user, class: "basic-form" do |f| %>
+      <div class="form-field">
+        <%= f.label :name, "名前" %>
+        <%= f.text_field :name %>
+      </div>
 
-  <p>
-    メールアドレス<br>
-    <%= f.email_field :email %>
-  </p>
+      <div class="form-field">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email %>
+      </div>
 
-  <p>
-    パスワード<br>
-    <%= f.password_field :password %>
-  </p>
+      <div class="form-field">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password %>
+      </div>
 
-  <p>
-    パスワード（確認用）<br>
-    <%= f.password_field :password_confirmation %>
-  </p>
+      <div class="form-field">
+        <%= f.label :password_confirmation, "パスワード（確認用）" %>
+        <%= f.password_field :password_confirmation %>
+      </div>
 
-  <p>
-    <%= f.submit "登録" %>
-  </p>
-<% end %>
+      <div class="form-submit">
+        <%= f.submit "登録" %>
+      </div>
+    <% end %>
+  </section>
+</main>
