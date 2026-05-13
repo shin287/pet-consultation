@@ -35,7 +35,7 @@
     <% end %>
   </section>
 
-  <% if current_user&.expert? %>
+  <% if current_user&.expert? || current_user&.guest? %>
     <section class="content-card">
       <h2>回答する</h2>
       <% if @answer.errors.any? %>

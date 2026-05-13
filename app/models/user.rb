@@ -24,6 +24,10 @@ class User < ApplicationRecord
     role == "expert"
   end
 
+  def guest?
+    email == "guest@example.com"
+  end
+
   def general?
     role == "general"
   end
