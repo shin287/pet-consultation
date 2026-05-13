@@ -16,9 +16,9 @@
           <%= f.text_field :title %>
         </div>
 
-        <div class="form-field">
-          <%= f.label :category, "カテゴリ" %>
-          <%= f.text_field :category %>
+        <div class="readonly-field">
+          <span>カテゴリ</span>
+          <p><%= @question.animal_type %> / <%= @question.consultation_type %></p>
         </div>
 
         <div class="form-field">

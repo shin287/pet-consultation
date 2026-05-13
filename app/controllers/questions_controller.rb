@@ -54,7 +54,7 @@ class QuestionsController < ApplicationController
     if @question.answers.any?
       update_params = params.require(:question).permit(:additional_info)
     else
-      update_params = question_params
+      update_params = editable_question_params
     end
 
     if @question.update(update_params)
@@ -100,6 +100,14 @@ class QuestionsController < ApplicationController
       :consultation_type, 
       :animal_other,
       :image
+    )
+  end
+
+  def editable_question_params
+    params.require(:question).permit(
+      :title,
+      :body,
+      :additional_info
     )
   end
 end
