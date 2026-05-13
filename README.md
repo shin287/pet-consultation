@@ -73,7 +73,7 @@
 ---
 
 ## ER図
-![ER図](docs/pet_consultation_simple_er.png)
+![ER図](docs/app_er.png)
 
 ---
 
