@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :require_expert
+  before_action :require_answer_permission
   def create
     @question = Question.find(params[:question_id])
 
@@ -15,8 +15,8 @@ class AnswersController < ApplicationController
 
   private
 
-  def require_expert
-    unless current_user&.expert?
+  def require_answer_permission
+    unless current_user&.expert? || current_user&.guest?
       redirect_to questions_path
     end
   end
