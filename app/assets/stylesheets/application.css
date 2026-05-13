@@ -343,6 +343,25 @@ header nav form {
   gap: 7px;
 }
 
+.readonly-field {
+  display: grid;
+  gap: 7px;
+  padding: 14px 16px;
+  border: 1px solid #e1e9e3;
+  border-radius: 12px;
+  background-color: #f7fbf8;
+}
+
+.readonly-field span {
+  color: #2b3b32;
+  font-weight: 700;
+}
+
+.readonly-field p {
+  margin: 0;
+  color: #526258;
+}
+
 .form-group {
   display: grid;
   gap: 14px;
